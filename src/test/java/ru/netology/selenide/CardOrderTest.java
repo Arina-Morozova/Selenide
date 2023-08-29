@@ -21,9 +21,9 @@ public class CardOrderTest {
 
         $("[data-test-id=city] input").setValue("Архангельск");
 
-        String currentDate = generateDate(4, "dd.MM.yyyy");
+        String planningDate = generateDate(4, "dd.MM.yyyy");
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
-        $("[data-test-id=date] input").sendKeys(currentDate);
+        $("[data-test-id=date] input").sendKeys(planningDate);
 
         $("[data-test-id=name] input").setValue("Морозова Арина");
         $("[data-test-id=phone] input").setValue("+71234567890");
@@ -31,26 +31,26 @@ public class CardOrderTest {
         $("button.button").click();
         $(".notification__content")
                 .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                .shouldHave(Condition.exactText("Встреча успешно забронирована на " + currentDate));
+                .shouldHave(Condition.exactText("Встреча успешно забронирована на " + planningDate));
     }
 
-//    @org.junit.jupiter.api.Test
-//    void shouldTestIfFailedByUnavailableCity() {
-//        open("http://localhost:9999");
-//
-//        $("[data-test-id=city] input").setValue("Борисоглебск");
-//
-//        String currentDate = generateDate(4, "dd.MM.yyyy");
-//        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
-//        $("[data-test-id=date] input").sendKeys(currentDate);
-//
-//        $("[data-test-id=name] input").setValue("Морозова Арина");
-//        $("[data-test-id=phone] input").setValue("+71234567890");
-//        $("[data-test-id=agreement]").click();
-//        $("button.button").click();
-//        $("input_invalid.input__sub")
-//                //.shouldBe(Condition.visible, Duration.ofSeconds(15))
-//                .shouldHave(Condition.exactText("Доставка в выбранный город недоступна"));
-//    }
+    @org.junit.jupiter.api.Test
+    void shouldTestIfFailedByUnavailableCity() {
+        open("http://localhost:9999");
+
+        $("[data-test-id=city] input").setValue("Борисоглебск");
+
+        String planningDate = generateDate(4, "dd.MM.yyyy");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
+        $("[data-test-id=date] input").sendKeys(planningDate);
+
+        $("[data-test-id=name] input").setValue("Морозова Арина");
+        $("[data-test-id=phone] input").setValue("+71234567890");
+        $("[data-test-id=agreement]").click();
+        $("button.button").click();
+        $("[data-test-id=city] input__sub")
+                //.shouldBe(Condition.visible, Duration.ofSeconds(15))
+                .shouldHave(Condition.exactText("Доставка в выбранный город недоступна"));
+    }
 
 }
